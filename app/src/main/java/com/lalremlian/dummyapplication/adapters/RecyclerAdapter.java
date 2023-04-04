@@ -11,7 +11,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lalremlian.dummyapplication.R;
-import com.lalremlian.dummyapplication.models.Post;
+import com.lalremlian.dummyapplication.data.model.Post;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.myview
         this.context = context;
     }
 
-    public void updatemovielist(List<Post> list) {
+    public void updatepostlist(List<Post> list) {
         this.postList = list;
         notifyDataSetChanged();
     }

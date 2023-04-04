@@ -1,4 +1,4 @@
-package com.lalremlian.dummyapplication.models;
+package com.lalremlian.dummyapplication.data.model;
 
 public class Post {
 

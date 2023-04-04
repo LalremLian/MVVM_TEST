@@ -1,6 +1,6 @@
-package com.lalremlian.dummyapplication.apis;
+package com.lalremlian.dummyapplication.data.repository;
 
-import com.lalremlian.dummyapplication.models.Post;
+import com.lalremlian.dummyapplication.data.model.Post;
 
 import java.util.List;
 
