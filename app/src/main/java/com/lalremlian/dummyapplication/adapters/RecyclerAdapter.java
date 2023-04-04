@@ -1,6 +1,7 @@
 package com.lalremlian.dummyapplication.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.lalremlian.dummyapplication.R;
 import com.lalremlian.dummyapplication.data.model.Post;
+import com.lalremlian.dummyapplication.ui.view.DetailsActivity;
 
 import java.util.List;
 
@@ -42,6 +44,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.myview
 
       holder.title.setText(postList.get(position).getTitle());
       holder.description.setText(postList.get(position).getBody());
+
+      holder.cardView.setOnClickListener(V->
+      {
+          String str = postList.get(position).getBody();
+          Intent intent = new Intent(context, DetailsActivity.class);
+          intent.putExtra("DATA", str);
+          context.startActivity(intent);
+      });
 
    }
 

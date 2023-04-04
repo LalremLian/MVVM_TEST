@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:backgroundTint="#C6C6C6"
+    android:backgroundTint="#E6E6E6"
     android:layout_margin="8dp"
     app:cardCornerRadius="10dp"
     android:id="@+id/card">
@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:textColor="@color/teal_700"
+            android:maxLines="1"
             android:text="TextView"
             android:textStyle="bold"
             android:textSize="20sp" />

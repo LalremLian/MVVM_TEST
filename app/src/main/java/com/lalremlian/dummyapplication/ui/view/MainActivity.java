@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         textView =findViewById(R.id.data_not_found_tv);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
+//        recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
 
         adapter=new RecyclerAdapter(postList, this);
         recyclerView.setAdapter(adapter);
