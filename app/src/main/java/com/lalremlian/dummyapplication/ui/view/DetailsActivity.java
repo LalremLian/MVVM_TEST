@@ -4,6 +4,8 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Build;
@@ -13,10 +15,15 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.lalremlian.dummyapplication.R;
+import com.lalremlian.dummyapplication.adapters.DetailsRecyclerAdapter;
+import com.lalremlian.dummyapplication.adapters.RecyclerAdapter;
+import com.lalremlian.dummyapplication.data.model.Comment;
 import com.lalremlian.dummyapplication.data.model.Post;
+import com.lalremlian.dummyapplication.ui.viewModel.CommentsViewModel;
 import com.lalremlian.dummyapplication.ui.viewModel.DetailsViewModel;
 import com.lalremlian.dummyapplication.ui.viewModel.PostListViewModel;
 
+import java.util.List;
 import java.util.Objects;
 
 public class DetailsActivity extends AppCompatActivity {
@@ -28,6 +35,11 @@ public class DetailsActivity extends AppCompatActivity {
     Post postList;
 
     DetailsViewModel listViewModel;
+
+    RecyclerView recyclerView;
+    List<Comment> commentList;
+    CommentsViewModel commentListViewModel;
+    DetailsRecyclerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +66,40 @@ public class DetailsActivity extends AppCompatActivity {
 
         textView = findViewById(R.id.details_tv);
 
+        getDetails(id);
+
+        getComments(id);
+
+
+    }
+
+    private void getComments(String id) {
+
+        recyclerView = findViewById(R.id.recyclerView);
+        textView = findViewById(R.id.data_not_found_tv);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        adapter = new DetailsRecyclerAdapter(commentList, this);
+        recyclerView.setAdapter(adapter);
+
+        commentListViewModel = new ViewModelProvider(this).get(CommentsViewModel.class);
+
+        commentListViewModel.getPostListObserver().observe(this, postModel -> {
+            if (postModel != null) {
+                commentList = postModel;
+                adapter.updatecommentlist(postModel);
+
+//                textView.setText(postList.getBody());
+            }
+            if (postModel == null) {
+                textView.setText("No Data Found");
+            }
+        });
+        commentListViewModel.makeApiCall(id);
+    }
+
+    private void getDetails(String id) {
         listViewModel = new ViewModelProvider(this).get(DetailsViewModel.class);
 
         listViewModel.getPostListObserver().observe(this, postModel -> {
@@ -67,8 +113,6 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
         listViewModel.makeApiCall(id);
-
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)

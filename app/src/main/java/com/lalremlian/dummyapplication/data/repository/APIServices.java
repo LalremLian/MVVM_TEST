@@ -1,5 +1,6 @@
 package com.lalremlian.dummyapplication.data.repository;
 
+import com.lalremlian.dummyapplication.data.model.Comment;
 import com.lalremlian.dummyapplication.data.model.Post;
 
 import java.util.List;
@@ -15,4 +16,7 @@ public interface APIServices
 
     @GET("posts/{id}")
     Call<Post> getDetails(@Path("id") String id);
+
+    @GET("posts/{id}/comments")
+    Call<List<Comment>> getComments(@Path("id") String id);
 }
