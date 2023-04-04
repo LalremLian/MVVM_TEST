@@ -17,8 +17,7 @@ import com.lalremlian.dummyapplication.ui.view.DetailsActivity;
 
 import java.util.List;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.myviewholder>
-{
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.myviewholder> {
     List<Post> postList;
     Context context;
 
@@ -35,39 +34,41 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.myview
     @NonNull
     @Override
     public myviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.row_item,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.row_item, parent, false);
         return new myviewholder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull myviewholder holder, int position) {
 
-      holder.title.setText(postList.get(position).getTitle());
-      holder.description.setText(postList.get(position).getBody());
+        holder.title.setText(postList.get(position).getTitle());
+        holder.description.setText(postList.get(position).getBody());
 
-      holder.cardView.setOnClickListener(V->
-      {
-          String str = postList.get(position).getBody();
-          Intent intent = new Intent(context, DetailsActivity.class);
-          intent.putExtra("DATA", str);
-          context.startActivity(intent);
-      });
+        holder.cardView.setOnClickListener(V ->
+        {
+            String id = postList.get(position).getId();
+            String stTitle = postList.get(position).getTitle();
+            Intent intent = new Intent(context, DetailsActivity.class);
+            intent.putExtra("DATA", id);
+            intent.putExtra("TITLE", stTitle);
+            context.startActivity(intent);
+        });
 
-   }
+    }
 
     @Override
     public int getItemCount() {
-        if(this.postList !=null)
-         return this.postList.size();
+        if (this.postList != null)
+            return this.postList.size();
         else
             return 0;
     }
 
-    public class myviewholder extends RecyclerView.ViewHolder
-    {
+    public class myviewholder extends RecyclerView.ViewHolder {
         TextView title;
         TextView description;
         CardView cardView;
+
         public myviewholder(@NonNull View itemView) {
             super(itemView);
 
