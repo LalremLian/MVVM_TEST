@@ -1,4 +1,4 @@
-package com.lalremlian.dummyapplication.adapters;
+package com.lalremlian.dummyapplication.ui.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.lalremlian.dummyapplication.R;
 import com.lalremlian.dummyapplication.data.model.Post;
-import com.lalremlian.dummyapplication.ui.view.DetailsActivity;
+import com.lalremlian.dummyapplication.ui.activities.DetailsActivity;
 
 import java.util.List;
 

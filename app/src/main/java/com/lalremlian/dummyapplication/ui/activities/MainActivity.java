@@ -1,10 +1,9 @@
-package com.lalremlian.dummyapplication.ui.view;
+package com.lalremlian.dummyapplication.ui.activities;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,7 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.lalremlian.dummyapplication.R;
-import com.lalremlian.dummyapplication.adapters.RecyclerAdapter;
+import com.lalremlian.dummyapplication.ui.adapters.RecyclerAdapter;
 import com.lalremlian.dummyapplication.data.model.Post;
 import com.lalremlian.dummyapplication.ui.viewModel.PostListViewModel;
 

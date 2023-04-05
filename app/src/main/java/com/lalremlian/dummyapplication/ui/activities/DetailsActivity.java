@@ -1,4 +1,4 @@
-package com.lalremlian.dummyapplication.ui.view;
+package com.lalremlian.dummyapplication.ui.activities;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,13 +15,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.lalremlian.dummyapplication.R;
-import com.lalremlian.dummyapplication.adapters.DetailsRecyclerAdapter;
-import com.lalremlian.dummyapplication.adapters.RecyclerAdapter;
+import com.lalremlian.dummyapplication.ui.adapters.DetailsRecyclerAdapter;
 import com.lalremlian.dummyapplication.data.model.Comment;
 import com.lalremlian.dummyapplication.data.model.Post;
 import com.lalremlian.dummyapplication.ui.viewModel.CommentsViewModel;
 import com.lalremlian.dummyapplication.ui.viewModel.DetailsViewModel;
-import com.lalremlian.dummyapplication.ui.viewModel.PostListViewModel;
 
 import java.util.List;
 import java.util.Objects;
@@ -67,10 +65,6 @@ public class DetailsActivity extends AppCompatActivity {
         textView = findViewById(R.id.details_tv);
 
         getDetails(id);
-
-        getComments(id);
-
-
     }
 
     private void getComments(String id) {
@@ -89,8 +83,6 @@ public class DetailsActivity extends AppCompatActivity {
             if (postModel != null) {
                 commentList = postModel;
                 adapter.updatecommentlist(postModel);
-
-//                textView.setText(postList.getBody());
             }
             if (postModel == null) {
                 textView.setText("No Data Found");
@@ -105,11 +97,13 @@ public class DetailsActivity extends AppCompatActivity {
         listViewModel.getPostListObserver().observe(this, postModel -> {
             if (postModel != null) {
                 postList = postModel;
-
                 textView.setText(postList.getBody());
+                getComments(id);
+
             }
             if (postModel == null) {
-                textView.setText("No Data Found");
+//                textView.setText("No Data Found");
+                getComments(id);
             }
         });
         listViewModel.makeApiCall(id);
