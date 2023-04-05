@@ -1,14 +1,16 @@
 # Test Dummpy App (MVVM)
-Mainlt for testing purposes
+Mainly for testing purposes
 
 ### Technology used
-- Basic Fake Store API (fakestoreapi.com)
+- Basic Fake Store API (gorest.co.in)
 - Used Third-Party Libraries
 - Android Studio
 - Java as a Main Programming Language
 - It requires a minimum of Android 5.0 (API level 21) to run
 - It requires internet connection to run
 
+### Library Used
+- Retrofit
 
 ### UI Designs
 - UI/UX designed made in Figma app and Canva!
