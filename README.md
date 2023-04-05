@@ -13,4 +13,4 @@ Mainlt for testing purposes
 ### UI Designs
 - UI/UX designed made in Figma app and Canva!
 
-![Shopping App UI](https://user-images.githubusercontent.com/68969199/177475495-8685151b-6608-45e1-a76d-c3a464bdffd4.png)
+![White   Pink Watercolor Fashion Designer Business Card](https://user-images.githubusercontent.com/68969199/230039372-6b0ded54-ba52-4132-b933-509c93714f01.png)
