@@ -19,40 +19,51 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <androidx.core.widget.NestedScrollView
         android:layout_below="@+id/toolbar"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:backgroundTint="#E6E6E6"
-        app:cardCornerRadius="10dp">
-        <TextView
-            android:id="@+id/details_tv"
+        android:layout_above="@+id/linearLayoutBottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:textAlignment="center"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:text="nothing"
-            android:textSize="20sp"/>
-    </androidx.cardview.widget.CardView>
+            android:layout_height="wrap_content">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="#E6E6E6"
+                app:cardCornerRadius="10dp">
+                <TextView
+                    android:id="@+id/details_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:textAlignment="center"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="nothing"
+                    android:textSize="20sp"/>
+            </androidx.cardview.widget.CardView>
 
-    <View
-        android:id="@+id/divider"
-        android:layout_below="@+id/card"
-        android:layout_width="match_parent"
-        android:layout_margin="20dp"
-        android:layout_height="1dp"
-        android:background="#D6D5D5"/>
+            <View
+                android:id="@+id/divider"
+                android:layout_below="@+id/card"
+                android:layout_width="match_parent"
+                android:layout_margin="20dp"
+                android:layout_height="1dp"
+                android:background="#D6D5D5"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_below="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_below="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
 
     <LinearLayout
         android:id="@+id/linearLayoutBottom"
@@ -69,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <EditText
-                    android:id="@+id/edtSearch"
+                    android:id="@+id/edtComment"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:padding="20dp"

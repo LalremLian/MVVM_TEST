@@ -1,5 +1,15 @@
 package com.lalremlian.dummyapplication.ui.activities;
 
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -7,18 +17,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Build;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
-
 import com.lalremlian.dummyapplication.R;
-import com.lalremlian.dummyapplication.ui.adapters.DetailsRecyclerAdapter;
 import com.lalremlian.dummyapplication.data.model.Comment;
 import com.lalremlian.dummyapplication.data.model.Post;
+import com.lalremlian.dummyapplication.ui.adapters.DetailsRecyclerAdapter;
 import com.lalremlian.dummyapplication.ui.viewModel.CommentsViewModel;
+import com.lalremlian.dummyapplication.ui.viewModel.CreateCommentViewModel;
 import com.lalremlian.dummyapplication.ui.viewModel.DetailsViewModel;
 
 import java.util.List;
@@ -28,11 +32,12 @@ public class DetailsActivity extends AppCompatActivity {
 
     TextView textView;
     TextView title;
+    EditText editText;
+    ImageView imageView;
     Toolbar toolbar;
-
     Post postList;
-
     DetailsViewModel listViewModel;
+    CreateCommentViewModel createCommentViewModel;
 
     RecyclerView recyclerView;
     List<Comment> commentList;
@@ -63,8 +68,14 @@ public class DetailsActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
 
         textView = findViewById(R.id.details_tv);
+        editText = findViewById(R.id.edtComment);
+        imageView = findViewById(R.id.imgSend);
+
+        imageView.setOnClickListener(v -> storeComment(id));
 
         getDetails(id);
+
+
     }
 
     private void getComments(String id) {
@@ -107,6 +118,21 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
         listViewModel.makeApiCall(id);
+    }
+
+    private void storeComment(String id){
+        createCommentViewModel = new ViewModelProvider(this).get(CreateCommentViewModel.class);
+        createCommentViewModel.getCommentListObserver().observe(this, postModel -> {
+            if (postModel != null) {
+                Toast.makeText(this, "Successfully Commented.", Toast.LENGTH_SHORT).show();
+                Log.e("TAG", "storeComment: " + postModel);
+            }
+            if (postModel == null) {
+                Log.e("TAG", "storeComment: Null");
+            }
+        });
+        createCommentViewModel.makeApiCall(id, editText.getText().toString());
+        editText.setText("");
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
