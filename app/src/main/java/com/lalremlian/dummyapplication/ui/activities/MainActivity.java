@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -52,6 +53,13 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new RecyclerAdapter(postList, this);
         recyclerView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(post -> {
+            Intent intent = new Intent(this, DetailsActivity.class);
+            intent.putExtra("DATA", post.getId());
+            intent.putExtra("TITLE", post.getTitle());
+            startActivity(intent);
+        });
 
         listViewModel = new ViewModelProvider(this).get(PostListViewModel.class);
         listViewModel.getPostListObserver().observe(this, postModel -> {

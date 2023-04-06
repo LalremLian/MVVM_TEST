@@ -50,10 +50,10 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
 
         Intent intent = getIntent();
-        String id = intent.getStringExtra("DATA");
         String stTitle = intent.getStringExtra("TITLE");
+        String stId = intent.getStringExtra("DATA");
 
-        Log.e("TAG", "onCreate: " + stTitle);
+        Log.e("TAG", "ID FROM BINDING: " + stId);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             showCustomUI();
@@ -71,10 +71,9 @@ public class DetailsActivity extends AppCompatActivity {
         editText = findViewById(R.id.edtComment);
         imageView = findViewById(R.id.imgSend);
 
-        imageView.setOnClickListener(v -> storeComment(id));
+        imageView.setOnClickListener(v -> storeComment(stId));
 
-        getDetails(id);
-
+        getDetails(stId);
 
     }
 
@@ -110,10 +109,9 @@ public class DetailsActivity extends AppCompatActivity {
                 postList = postModel;
                 textView.setText(postList.getBody());
                 getComments(id);
-
             }
             if (postModel == null) {
-//                textView.setText("No Data Found");
+                textView.setText("No Data Found");
                 getComments(id);
             }
         });
