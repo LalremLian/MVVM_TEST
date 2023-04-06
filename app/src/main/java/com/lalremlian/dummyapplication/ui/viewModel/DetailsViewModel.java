@@ -19,31 +19,33 @@ import retrofit2.Response;
 public class DetailsViewModel extends ViewModel {
     private MutableLiveData<Post> postList;
 
-    public DetailsViewModel(){
-        postList =new MutableLiveData<>();
+    public DetailsViewModel() {
+        postList = new MutableLiveData<>();
     }
 
-    public MutableLiveData<Post> getPostListObserver()
-    {
+    public MutableLiveData<Post> getPostListObserver() {
         return postList;
     }
 
-    public void makeApiCall(String id)
-    {
-        APIServices apiServices= RetroInstance.getRetroClient().create(APIServices.class);
-        Call<Post> call=apiServices.getDetails(id);
+    public void makeApiCall(String id) {
+        APIServices apiServices = RetroInstance.getRetroClient().create(APIServices.class);
+        Call<Post> call = apiServices.getDetails(id);
         call.enqueue(new Callback<Post>() {
             @Override
             public void onResponse(@NonNull Call<Post> call, @NonNull Response<Post> response) {
-                postList.postValue(response.body());
 
-                Log.e("Response",response.body().toString());
+                if (response.isSuccessful()) {
+                    postList.postValue(response.body());
+                } else {
+                    Log.e("Response", response.body().toString());
+                }
+
             }
 
             @Override
             public void onFailure(Call<Post> call, Throwable t) {
                 postList.postValue(null);
-                Log.e("Error :",t.getMessage().toString());
+                Log.e("Error :", t.getMessage().toString());
             }
         });
 

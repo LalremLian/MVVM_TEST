@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new RecyclerAdapter(postList, this);
+        adapter = new RecyclerAdapter(postList);
         recyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener(post -> {

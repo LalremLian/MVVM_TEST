@@ -1,6 +1,5 @@
 package com.lalremlian.dummyapplication.ui.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -14,12 +13,10 @@ import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.myviewholder> {
     List<Post> postList;
-    Context context;
     private OnItemClickListener onItemClickListener;
 
-    public RecyclerAdapter(List<Post> list, Context context) {
+    public RecyclerAdapter(List<Post> list) {
         this.postList = list;
-        this.context = context;
     }
 
     public void updatepostlist(List<Post> list) {

@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.lalremlian.dummyapplication.R;
 import com.lalremlian.dummyapplication.data.model.Comment;
 import com.lalremlian.dummyapplication.data.model.Post;
+import com.lalremlian.dummyapplication.databinding.ActivityDetailsBinding;
 import com.lalremlian.dummyapplication.ui.adapters.DetailsRecyclerAdapter;
 import com.lalremlian.dummyapplication.ui.viewModel.CommentsViewModel;
 import com.lalremlian.dummyapplication.ui.viewModel.CreateCommentViewModel;
@@ -49,6 +51,8 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
+        ActivityDetailsBinding xmlBinding = DataBindingUtil.setContentView(this, R.layout.activity_details);
+
         Intent intent = getIntent();
         String stTitle = intent.getStringExtra("TITLE");
         String stId = intent.getStringExtra("DATA");
@@ -73,7 +77,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         imageView.setOnClickListener(v -> storeComment(stId));
 
-        getDetails(stId);
+        getDetails(stId, xmlBinding);
 
     }
 
@@ -84,7 +88,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new DetailsRecyclerAdapter(commentList, this);
+        adapter = new DetailsRecyclerAdapter(commentList);
         recyclerView.setAdapter(adapter);
 
         commentListViewModel = new ViewModelProvider(this).get(CommentsViewModel.class);
@@ -95,19 +99,19 @@ public class DetailsActivity extends AppCompatActivity {
                 adapter.updatecommentlist(postModel);
             }
             if (postModel == null) {
-                textView.setText("No Data Found");
+//                textView.setText("No Data Found");
             }
         });
         commentListViewModel.makeApiCall(id);
     }
 
-    private void getDetails(String id) {
+    private void getDetails(String id, ActivityDetailsBinding xmlBinding) {
         listViewModel = new ViewModelProvider(this).get(DetailsViewModel.class);
 
         listViewModel.getPostListObserver().observe(this, postModel -> {
             if (postModel != null) {
                 postList = postModel;
-                textView.setText(postList.getBody());
+                xmlBinding.setPost(postList);
                 getComments(id);
             }
             if (postModel == null) {
